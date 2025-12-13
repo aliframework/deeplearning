@@ -67,7 +67,6 @@ Referensi yang digunakan dalam proyek ini adalah:
 
 ### Latar Belakang Penerapan Data Science
 
-#### Tantangan Tradisional
 Secara historis, dokter mengandalkan skor risiko klinis atau penilaian subjektif. Metode ini seringkali gagal menangkap interaksi kompleks antar variabel. Contohnya, hubungan antara kadar $creatinine\_serum$ yang tinggi dan $ejection\_fraction$ yang rendah mungkin memiliki efek non-linear terhadap risiko kematian yang sulit diukur oleh model statistik linear sederhana.
 
 #### Justifikasi Machine Learning (ML/DL)
@@ -85,7 +84,6 @@ Tuliskan 2–4 pernyataan masalah yang jelas dan spesifik.
 3. Dataset memiliki noise sehingga perlu preprocessing yang tepat
 4. Dibutuhkan model deep learning yang mampu belajar representasi fitur kompleks
 
-**[Tulis problem statements Anda di sini]**
 Berdasarkan latar belakang dan karakteristik domain kesehatan kardiovaskular, permasalahan yang diangkat dalam proyek ini adalah sebagai berikut:
 
 1. Tingginya tingkat mortalitas pasien gagal jantung memerlukan sistem prediksi risiko yang akurat dan objektif untuk membantu tenaga medis dalam pengambilan keputusan klinis.
@@ -104,7 +102,7 @@ Tujuan harus spesifik, terukur, dan selaras dengan problem statement.
 3. Menentukan model terbaik berdasarkan metrik evaluasi yang relevan
 4. Menghasilkan sistem yang dapat bekerja secara reproducible
 
-**[Tulis goals Anda di sini]**
+
 Tujuan dari proyek data science ini adalah:
 
 1. Membangun model klasifikasi untuk memprediksi mortalitas pasien gagal jantung dengan target akurasi minimal ≥ 80%.
@@ -127,7 +125,6 @@ Model sederhana sebagai pembanding dasar.
 - Decision Tree
 - Naive Bayes
 
-**[Jelaskan model baseline yang Anda pilih dan alasannya]**
 Model yang dipilih: Logistic Regression
 
 Alasan Pemilihan:
@@ -149,7 +146,6 @@ Model machine learning yang lebih kompleks.
 - Clustering (K-Means, DBSCAN) - untuk unsupervised
 - PCA / dimensionality reduction (untuk preprocessing)
 
-**[Jelaskan model advanced yang Anda pilih dan alasannya]**
 Model yang dipilih: Random Forest Classifier
 
 Alasan Pemilihan:
@@ -200,11 +196,10 @@ Model deep learning yang sesuai dengan jenis data.
 - ❌ Model tidak di-train (hanya define arsitektur)
 - ❌ Tidak ada evaluasi pada test set
 
-**[Jelaskan model deep learning yang Anda pilih dan alasannya]**
 Model yang dipilih: Multilayer Perceptron (MLP)
 
 Jenis Deep Learning:
-☑ Multilayer Perceptron (MLP) – untuk data tabular
+Multilayer Perceptron (MLP) – untuk data tabular
 
 Alasan Pemilihan:
 
@@ -219,14 +214,16 @@ Alasan Pemilihan:
 ## 4. DATA UNDERSTANDING
 ### 4.1 Informasi Dataset
 **Sumber Dataset:**  
-[Sebutkan sumber: Kaggle, UCI ML Repository, atau sumber lain dengan URL]
+UCI Machine Learning Repository / Kaggle
+Dataset: Heart Failure Clinical Records Dataset
+URL: https://archive.ics.uci.edu/ml/datasets/Heart+failure+clinical+records
 
 **Deskripsi Dataset:**
-- Jumlah baris (rows): [angka]
-- Jumlah kolom (columns/features): [angka]
-- Tipe data: [Tabular / Image / Text / Time Series / Audio / Video]
-- Ukuran dataset: [MB/GB]
-- Format file: [CSV / JSON / Images / TXT / etc.]
+- Jumlah baris (rows): 299
+- Jumlah kolom (columns/features): 13
+- Tipe data: Tabular
+- Ukuran dataset: ± 0.05 MB
+- Format file: CSV
 
 ### 4.2 Deskripsi Fitur
 Jelaskan setiap fitur/kolom yang ada dalam dataset.
@@ -241,18 +238,34 @@ Jelaskan setiap fitur/kolom yang ada dalam dataset.
 | image | Image | Citra 224x224 RGB | Array 224x224x3 |
 | label | Categorical | Label target | 0, 1 atau "positif", "negatif" |
 
-**[Buat tabel deskripsi fitur Anda di sini]**
+| Nama Fitur | Tipe Data | Deskripsi | Contoh Nilai |
+|------------|-----------|-----------|--------------|
+| age | Float | Usia pasien (tahun) | 60, 75 |
+| anaemia | Integer | Status anemia (0 = Tidak, 1 = Ya) | 0, 1 |
+| creatinine_phosphokinase | Integer | Level CPK dalam darah | 582 |
+| diabetes | Integer | Status diabetes (0 = Tidak, 1 = Ya) | 0, 1 |
+| ejection_fraction | Integer | Persentase darah yang keluar dari jantung | 20, 38 |
+| high_blood_pressure | Integer | Tekanan darah tinggi | 0, 1 |
+| platelets | Float | Jumlah trombosit | 265000 |
+| serum_creatinine | Float | Kadar kreatinin serum | 1.9 |
+| serum_sodium | Integer | Kadar natrium serum | 137 |
+| sex | Integer | Jenis kelamin (0 = Perempuan, 1 = Laki-laki) | 0, 1 |
+| smoking | Integer | Status merokok | 0, 1 |
+| time | Integer | Waktu follow-up (hari) | 130 |
+| DEATH_EVENT | Integer | Target: kematian pasien | 0, 1 |
 
 ### 4.3 Kondisi Data
 
 Jelaskan kondisi dan permasalahan data:
 
-- **Missing Values:** [Ada/Tidak, berapa persen?]
-- **Duplicate Data:** [Ada/Tidak, berapa banyak?]
-- **Outliers:** [Ada/Tidak, pada fitur apa?]
-- **Imbalanced Data:** [Ada/Tidak, rasio kelas?]
-- **Noise:** [Jelaskan jika ada]
-- **Data Quality Issues:** [Jelaskan jika ada masalah lain]
+- **Missing Values:** Tidak ditemukan missing values.
+- **Duplicate Data:** Tidak ditemukan data duplicate
+- **Outliers:** Terdapat outliers pada fitur `creatinine_phosphokinase`, `platelets`, dan `serum_creatinine`.
+- **Imbalanced Data:** Ya
+* DEATH_EVENT = 0 : ± 68%
+* DEATH_EVENT = 1 : ± 32%
+- **Noise:** Ada potensi noise pada fitur laboratorium dengan rentang nilai yang sangat besar.
+- **Data Quality Issues:** Dataset relatif bersih namun berukuran kecil.
 
 ### 4.4 Exploratory Data Analysis (EDA) - (**OPSIONAL**)
 
