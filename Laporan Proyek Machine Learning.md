@@ -42,7 +42,13 @@ Pada proyek ini, mahasiswa diharapkan dapat:
 **Contoh referensi (berformat APA/IEEE):**
 > Goodfellow, I., Bengio, Y., & Courville, A. (2016). *Deep Learning*. MIT Press.
 
-**[Jelaskan konteks dan latar belakang proyek]**
+**| Aspek         | Deskripsi                                                                 |
+|:--------------|:--------------------------------------------------------------------------|
+| Domain        | Kesehatan (Kardiologi)                                                    |
+| Kondisi       | Gagal Jantung (Heart Failure/HF), penyebab morbiditas dan mortalitas signifikan |
+| Tujuan Medis  | Menentukan risiko mortalitas pasien dalam jangka waktu tertentu (prognosis) |
+| Data          | Data klinis pasien selama follow-up: variabel demografi, kebiasaan, dan tes laboratorium (contoh: creatinine_serum, ejection_fraction, platelets) |
+| Target Output | Variabel biner DEATH_EVENT (0: Bertahan Hidup, 1: Meninggal)              |**
 
 ## 3. BUSINESS UNDERSTANDING / PROBLEM UNDERSTANDING
 ### 3.1 Problem Statements
