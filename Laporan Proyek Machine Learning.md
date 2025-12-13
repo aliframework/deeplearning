@@ -1,14 +1,14 @@
 ## INFORMASI PROYEK
 
 **Judul Proyek:**  
-[(Contoh: "Klasifikasi Penyakit Daun Menggunakan CNN", "Prediksi Harga Rumah dengan Machine Learning", "Analisis Sentimen Ulasan Produk")]
+[Klasifikasi Mortalitas (Kematian) Pasien Gagal Jantung Menggunakan Algoritma Machine Learning dan Deep Learning]
 
-**Nama Mahasiswa:** [Nama Lengkap]  
-**NIM:** [Nomor Induk Mahasiswa]  
-**Program Studi:** [Teknologi Informasi / Rekayasa Perangkat Lunak]  
-**Mata Kuliah:** [Nama Mata Kuliah]  
-**Dosen Pengampu:** [Nama Dosen]  
-**Tahun Akademik:** [Tahun/Semester]
+**Nama Mahasiswa:** [Alif Rahmathul Jadid]  
+**NIM:** [234311030]  
+**Program Studi:** [Teknologi Rekayasa Perangkat Lunak]  
+**Mata Kuliah:** [Data Science]  
+**Dosen Pengampu:** [Gus Nanang Syaifuddin,S.Kom.,M.Kom.]  
+**Tahun Akademik:** [2025/5]
 **Link GitHub Repository:** [URL Repository]
 **Link Video Pembahasan:** [URL Repository]
 
@@ -42,7 +42,6 @@ Pada proyek ini, mahasiswa diharapkan dapat:
 **Contoh referensi (berformat APA/IEEE):**
 > Goodfellow, I., Bengio, Y., & Courville, A. (2016). *Deep Learning*. MIT Press.
 
-**
 | Aspek         | Deskripsi                                                                 |
 |:--------------|:--------------------------------------------------------------------------|
 | Domain        | Kesehatan (Kardiologi)                                                    |
@@ -50,7 +49,13 @@ Pada proyek ini, mahasiswa diharapkan dapat:
 | Tujuan Medis  | Menentukan risiko mortalitas pasien dalam jangka waktu tertentu (prognosis) |
 | Data          | Data klinis pasien selama follow-up: variabel demografi, kebiasaan, dan tes laboratorium (contoh: creatinine_serum, ejection_fraction, platelets) |
 | Target Output | Variabel biner DEATH_EVENT (0: Bertahan Hidup, 1: Meninggal)              |
-**
+
+**Latar Belakang Penerapan Data Science**
+Tantangan Tradisional:Secara historis, dokter mengandalkan skor risiko klinis atau penilaian subjektif. Metode ini seringkali gagal menangkap interaksi kompleks antar variabel. Contohnya, hubungan antara kadar $creatinine\_serum$ yang tinggi dan $ejection\_fraction$ yang rendah mungkin memiliki efek non-linear terhadap risiko kematian yang sulit diukur oleh model statistik linear sederhana.
+Justifikasi Machine Learning (ML/DL):
+Identifikasi Pola Kompleks: ML/DL unggul dalam menemukan pola non-linear dan interaksi kompleks antar fitur (variabel klinis) yang tersembunyi.
+Objektivitas: Model ML menawarkan alat bantu keputusan yang objektif, mengurangi variasi dalam penilaian risiko antar dokter.
+Peningkatan Akurasi: Penelitian (seperti yang dilakukan oleh Chicco & Jurman, 2020) menunjukkan bahwa model ML dapat melebihi performa skor klinis tradisional, bahkan dengan jumlah fitur yang terbatas.
 
 ## 3. BUSINESS UNDERSTANDING / PROBLEM UNDERSTANDING
 ### 3.1 Problem Statements
