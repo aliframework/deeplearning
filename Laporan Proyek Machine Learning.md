@@ -3,7 +3,7 @@
 **Judul Proyek:**  
 [Klasifikasi Mortalitas (Kematian) Pasien Gagal Jantung Menggunakan Algoritma Machine Learning dan Deep Learning]
 
-**Nama Mahasiswa:** [Alif Rahmathul Jadid]  
+**Nama Mahasiswa:** [Alif Rahmathul]  
 **NIM:** [234311030]  
 **Program Studi:** [Teknologi Rekayasa Perangkat Lunak]  
 **Mata Kuliah:** [Data Science]  
@@ -86,7 +86,15 @@ Tuliskan 2–4 pernyataan masalah yang jelas dan spesifik.
 4. Dibutuhkan model deep learning yang mampu belajar representasi fitur kompleks
 
 **[Tulis problem statements Anda di sini]**
+Berdasarkan latar belakang dan karakteristik domain kesehatan kardiovaskular, permasalahan yang diangkat dalam proyek ini adalah sebagai berikut:
 
+1. Tingginya tingkat mortalitas pasien gagal jantung memerlukan sistem prediksi risiko yang akurat dan objektif untuk membantu tenaga medis dalam pengambilan keputusan klinis.
+
+2. Pendekatan tradisional berbasis skor klinis sering kali tidak mampu menangkap hubungan non-linear dan interaksi kompleks antar variabel klinis seperti usia, fraksi ejeksi, dan kadar kreatinin serum.
+
+3. Dataset klinis bersifat tabular dan cenderung imbalanced, sehingga diperlukan teknik preprocessing dan evaluasi model yang tepat agar prediksi tidak bias terhadap kelas mayoritas.
+
+4. Perlu dilakukan perbandingan performa antara model baseline, machine learning lanjutan, dan deep learning untuk menentukan pendekatan terbaik dalam memprediksi mortalitas pasien gagal jantung.
 ### 3.2 Goals
 
 Tujuan harus spesifik, terukur, dan selaras dengan problem statement.
@@ -97,6 +105,15 @@ Tujuan harus spesifik, terukur, dan selaras dengan problem statement.
 4. Menghasilkan sistem yang dapat bekerja secara reproducible
 
 **[Tulis goals Anda di sini]**
+Tujuan dari proyek data science ini adalah:
+
+1. Membangun model klasifikasi untuk memprediksi mortalitas pasien gagal jantung dengan target akurasi minimal ≥ 80%.
+
+2. Membandingkan performa tiga pendekatan model, yaitu baseline model, advanced machine learning model, dan deep learning model.
+
+3. Menentukan model terbaik berdasarkan metrik evaluasi yang relevan untuk data medis (accuracy, precision, recall, F1-score, dan ROC-AUC).
+
+4. Menghasilkan pipeline analisis yang reproducible, terdokumentasi dengan baik, dan dapat digunakan sebagai dasar sistem pendukung keputusan klinis.
 
 ### 3.3 Solution Approach
 
@@ -111,7 +128,17 @@ Model sederhana sebagai pembanding dasar.
 - Naive Bayes
 
 **[Jelaskan model baseline yang Anda pilih dan alasannya]**
+Model yang dipilih: Logistic Regression
 
+Alasan Pemilihan:
+
+Logistic Regression merupakan model klasifikasi linier yang sederhana dan umum digunakan dalam bidang medis.
+
+Model ini mudah diinterpretasikan dan sering dijadikan baseline dalam penelitian prediksi klinis.
+
+Memberikan pembanding dasar sebelum menggunakan model yang lebih kompleks.
+
+Logistic Regression memodelkan probabilitas kejadian kematian (DEATH_EVENT = 1) berdasarkan kombinasi linier dari fitur-fitur klinis yang tersedia.
 #### **Model 2 – Advanced / ML Model**
 Model machine learning yang lebih kompleks.
 **Pilihan model:**
@@ -123,7 +150,17 @@ Model machine learning yang lebih kompleks.
 - PCA / dimensionality reduction (untuk preprocessing)
 
 **[Jelaskan model advanced yang Anda pilih dan alasannya]**
+Model yang dipilih: Random Forest Classifier
 
+Alasan Pemilihan:
+
+* Random Forest mampu menangkap hubungan non-linear antar fitur.
+
+* Lebih robust terhadap noise dan outliers dibanding model linier.
+
+* Menyediakan informasi feature importance yang berguna untuk interpretasi medis.
+
+Random Forest merupakan ensemble dari beberapa decision tree yang bekerja secara voting, sehingga meningkatkan stabilitas dan akurasi prediksi.
 #### **Model 3 – Deep Learning Model (WAJIB)**
 Model deep learning yang sesuai dengan jenis data.
 **Pilihan Implementasi (pilih salah satu sesuai dataset):**
@@ -164,6 +201,18 @@ Model deep learning yang sesuai dengan jenis data.
 - ❌ Tidak ada evaluasi pada test set
 
 **[Jelaskan model deep learning yang Anda pilih dan alasannya]**
+Model yang dipilih: Multilayer Perceptron (MLP)
+
+Jenis Deep Learning:
+☑ Multilayer Perceptron (MLP) – untuk data tabular
+
+Alasan Pemilihan:
+
+- Dataset berbentuk data tabular numerik, sehingga MLP merupakan arsitektur deep learning yang paling sesuai.
+
+- MLP mampu mempelajari representasi non-linear yang kompleks dari data klinis.
+
+- Digunakan untuk membandingkan efektivitas deep learning terhadap model ML konvensional pada dataset berukuran kecil-menengah.
 
 ---
 
