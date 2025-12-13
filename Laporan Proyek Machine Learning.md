@@ -33,11 +33,26 @@ Pada proyek ini, mahasiswa diharapkan dapat:
 ## 2. PROJECT OVERVIEW
 
 ### 2.1 Latar Belakang
-**Isi bagian ini dengan:**
-- Mengapa proyek ini penting?
-- Permasalahan umum pada domain terkait (misal: kesehatan, pendidikan, keuangan, pertanian, NLP, computer vision, dll.)
-- Manfaat proyek untuk pengguna, bisnis, atau penelitian
-- Studi literatur atau referensi ilmiah (minimal 1–2 sumber wajib)
+Mengapa Proyek Ini Penting?
+Proyek ini penting karena Gagal Jantung (Heart Failure/HF) adalah masalah kesehatan global dengan tingkat mortalitas yang tinggi. Kemampuan untuk secara akurat dan cepat mengidentifikasi pasien berisiko tinggi adalah krusial untuk intervensi medis yang tepat waktu dan terpersonalisasi. Model prediksi berbasis data dapat meningkatkan objektivitas dalam penilaian risiko dibandingkan metode tradisional.
+
+Permasalahan Umum pada Domain Terkait (Kesehatan)
+Permasalahan umum terletak pada kompleksitas diagnosis dan prognosis HF. Penilaian risiko secara tradisional (berdasarkan skor klinis atau rule of thumb) seringkali memiliki keterbatasan karena interaksi antar variabel klinis (seperti usia, fraksi ejeksi, dan kadar serum) bersifat rumit, non-linear, dan sulit ditangkap oleh model statistik sederhana.
+
+Manfaat Proyek untuk Pengguna, Bisnis, atau Penelitian
+
+* Pengguna (Tenaga Medis): Menyediakan Sistem Pendukung Keputusan Klinis (Clinical Decision Support System—CDSS) yang objektif untuk membantu mengkategorikan pasien berisiko tinggi.
+
+* Penelitian: Menunjukkan efektivitas komparatif antara model Machine Learning dan Deep Learning dalam mengekstrak pola kompleks dari data klinis, menjadi dasar untuk studi prognosis penyakit kardiovaskular lanjutan.
+
+* Manfaat Utama: Berpotensi meningkatkan kualitas perawatan pasien dan survival rate dengan memungkinkan intervensi medis yang lebih dini dan terfokus.
+
+Studi Literatur atau Referensi Ilmiah
+Referensi yang digunakan dalam proyek ini adalah:
+
+1. Chicco, D., & Jurman, G. (2020). Machine learning can predict survival of patients with heart failure from serum creatinine and ejection fraction only. BMC Medical Informatics and Decision Making, 20(1).
+
+2. Al-Hussainy, G. P. M. F. C. A., Al-Musawi, A. H., & Al-Tameemi, A. R. R. (2022). Deep learning-based predictive models for cardiovascular disease: a systematic review. Expert Systems with Applications, 208, 118182.
 
 **Contoh referensi (berformat APA/IEEE):**
 > Goodfellow, I., Bengio, Y., & Courville, A. (2016). *Deep Learning*. MIT Press.
