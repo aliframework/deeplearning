@@ -726,19 +726,39 @@ history = model_dl.fit(
 **Interpretasi:**
 
 1. **Model Terbaik:**  
-   [Sebutkan model mana yang terbaik dan mengapa]
+   Berdasarkan hasil evaluasi pada data uji, model Random Forest (Model Advanced) menunjukkan performa terbaik dibandingkan model lainnya. Hal ini ditunjukkan oleh nilai Accuracy, Precision, Recall, dan F1-Score yang lebih tinggi serta stabil dibandingkan model Logistic Regression sebagai baseline dan model Deep Learning (MLP).
+
+Keunggulan Random Forest disebabkan oleh kemampuannya dalam menangkap hubungan non-linear antar fitur serta sifat ensemble yang menggabungkan banyak pohon keputusan, sehingga menghasilkan prediksi yang lebih robust terhadap variasi data dan noise.
 
 2. **Perbandingan dengan Baseline:**  
-   [Jelaskan peningkatan performa dari baseline ke model lainnya]
+   Model Logistic Regression digunakan sebagai baseline untuk merepresentasikan pendekatan linear sederhana. Hasil eksperimen menunjukkan bahwa:
+
+* Random Forest memberikan peningkatan performa yang signifikan dibandingkan baseline, terutama pada metrik Recall dan F1-Score, yang menunjukkan kemampuan lebih baik dalam mengenali pola kelas positif.
+* Model MLP menunjukkan penurunan dibandingkan baseline, namun tidak terlalu jauh.
+
+Peningkatan performa dari baseline ke model yang lebih kompleks menunjukkan bahwa pola pada data tidak sepenuhnya linear dan membutuhkan model dengan kemampuan representasi yang lebih tinggi.
 
 3. **Trade-off:**  
-   [Jelaskan trade-off antara performa vs kompleksitas vs waktu training]
+   Terdapat trade-off yang jelas antara kompleksitas model, performa, dan waktu komputasi:
+
+* Logistic Regression memiliki waktu training dan inference paling cepat, namun performanya terbatas karena hanya mampu memodelkan hubungan linear.
+* Random Forest memberikan keseimbangan terbaik antara performa dan waktu komputasi. Meskipun waktu training lebih lama dibandingkan baseline, peningkatan performa yang diperoleh cukup signifikan.
+* Model MLP memiliki kompleksitas arsitektur paling tinggi dan waktu training paling lama, namun peningkatan performa yang diperoleh tidak sebanding dengan kompleksitas tambahan yang diberikan.
+
+Dengan demikian, Random Forest merupakan pilihan paling optimal untuk kasus ini karena menawarkan performa tinggi dengan kompleksitas dan waktu training yang masih dapat diterima.
 
 4. **Error Analysis:**  
-   [Jelaskan jenis kesalahan yang sering terjadi, kasus yang sulit diprediksi]
+   Berdasarkan analisis confusion matrix dan classification report, kesalahan prediksi yang paling sering terjadi adalah:
+
+* False Positive, yaitu model memprediksi kelas positif padahal data sebenarnya negatif.
+* False Negative, terutama pada sampel yang memiliki nilai fitur yang berada di batas ambang antar kelas.
+
+Kasus yang sulit diprediksi umumnya merupakan data dengan karakteristik fitur yang saling tumpang tindih (overlapping), sehingga perbedaan antar kelas tidak terlalu jelas. Model Deep Learning (MLP) menunjukkan sensitivitas yang lebih tinggi terhadap kasus-kasus ini dibandingkan Random Forest.
 
 5. **Overfitting/Underfitting:**  
-   [Analisis apakah model mengalami overfitting atau underfitting]
+* Logistic Regression cenderung mengalami underfitting, karena model terlalu sederhana untuk menangkap kompleksitas pola pada data, yang terlihat dari performa yang relatif rendah baik pada data latih maupun data uji.
+* Random Forest tidak menunjukkan indikasi overfitting yang signifikan. Performa pada data latih dan data uji relatif seimbang, menandakan kemampuan generalisasi yang baik.
+* Model MLP menunjukkan indikasi overfitting ringan, di mana performa pada data latih lebih tinggi dibandingkan data uji. Hal ini disebabkan oleh jumlah data yang relatif terbatas untuk model deep learning, meskipun telah diterapkan teknik regularisasi seperti dropout dan early stopping.
 
 ---
 
@@ -747,32 +767,56 @@ history = model_dl.fit(
 ### 8.1 Kesimpulan Utama
 
 **Model Terbaik:**  
-[Sebutkan model terbaik berdasarkan evaluasi]
+Berdasarkan hasil evaluasi kinerja model pada data uji, Random Forest Classifier ditetapkan sebagai model terbaik dalam proyek prediksi mortalitas pasien gagal jantung.
+
+Model ini menunjukkan performa paling stabil dan unggul pada berbagai metrik evaluasi, termasuk Accuracy, Precision, Recall, F1-Score, dan ROC-AUC, dibandingkan dengan Logistic Regression sebagai baseline dan model Deep Learning (MLP).
 
 **Alasan:**  
-[Jelaskan mengapa model tersebut lebih unggul]
+Keunggulan Random Forest dibandingkan model lain disebabkan oleh beberapa faktor utama:
+
+1. Kemampuan Random Forest dalam menangkap hubungan non-linear dan interaksi kompleks antar fitur klinis, yang umum terjadi pada data medis.
+2. Sifat ensemble dari Random Forest mampu mengurangi overfitting dan meningkatkan generalisasi model.
+3. Model relatif robust terhadap noise dan outliers, yang terdapat pada beberapa fitur laboratorium seperti creatinine dan platelets.
+4. Waktu training dan inference masih efisien dibandingkan kompleksitas model deep learning, sehingga lebih praktis untuk diterapkan.
 
 **Pencapaian Goals:**  
-[Apakah goals di Section 3.2 tercapai? Jelaskan]
+Tujuan yang ditetapkan pada Section 3.2 telah berhasil dicapai, dengan rincian sebagai berikut:
+
+* Target pembangunan model klasifikasi dengan akurasi ≥ 80% berhasil dicapai oleh model Random Forest dan MLP.
+* Perbandingan performa antara baseline model, advanced ML model, dan deep learning model telah dilakukan secara sistematis.
+* Model terbaik berhasil ditentukan berdasarkan metrik evaluasi yang relevan untuk domain kesehatan.
+* Pipeline analisis bersifat reproducible, terdokumentasi dengan baik, dan dapat digunakan sebagai dasar pengembangan sistem pendukung keputusan klinis.
+
+Dengan demikian, seluruh tujuan utama proyek data science ini dapat dikatakan tercapai.
 
 ### 8.2 Key Insights
 
 **Insight dari Data:**
-- [Insight 1]
-- [Insight 2]
-- [Insight 3]
+* Fitur klinis tertentu memiliki pengaruh besar terhadap risiko mortalitas, terutama fitur yang berkaitan dengan fungsi jantung dan ginjal seperti ejection_fraction dan serum_creatinine.
+* Dataset memiliki ketidakseimbangan kelas (imbalanced) yang berpotensi memengaruhi performa model jika tidak ditangani dengan tepat.
+* Data klinis tabular dengan ukuran relatif kecil tetap dapat memberikan hasil prediksi yang baik apabila dilakukan preprocessing dan pemilihan model yang sesuai.
 
 **Insight dari Modeling:**
-- [Insight 1]
-- [Insight 2]
+* Model berbasis ensemble seperti Random Forest terbukti lebih efektif dibandingkan model linier dan deep learning pada dataset tabular berukuran kecil hingga menengah.
+
+* Deep Learning tidak selalu memberikan performa terbaik, terutama ketika jumlah data terbatas, meskipun telah diterapkan teknik regularisasi seperti dropout dan early stopping.
 
 ### 8.3 Kontribusi Proyek
 
 **Manfaat praktis:**  
-[Jelaskan bagaimana proyek ini dapat digunakan di dunia nyata]
+Proyek ini berpotensi dikembangkan menjadi Sistem Pendukung Keputusan Klinis (Clinical Decision Support System) yang dapat membantu tenaga medis dalam:
+
+* Mengidentifikasi pasien gagal jantung dengan risiko mortalitas tinggi.
+* Mendukung pengambilan keputusan medis secara lebih objektif dan berbasis data.
+* Meningkatkan efektivitas intervensi medis melalui deteksi risiko yang lebih dini.
 
 **Pembelajaran yang didapat:**  
-[Jelaskan apa yang Anda pelajari dari proyek ini]
+Melalui proyek ini, penulis memperoleh beberapa pembelajaran penting, antara lain:
+
+* Pemahaman menyeluruh tentang proses end-to-end data science, mulai dari problem understanding hingga evaluasi model.
+* Pengalaman dalam membangun dan membandingkan model baseline, machine learning lanjutan, dan deep learning.
+* Pemahaman bahwa pemilihan model harus disesuaikan dengan karakteristik data, bukan hanya berdasarkan kompleksitas algoritma.
+* Penerapan prinsip reproducibility dan software engineering dalam pengembangan proyek data science.
 
 ---
 
