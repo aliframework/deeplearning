@@ -283,8 +283,9 @@ Jelaskan kondisi dan permasalahan data:
 - Class distribution plot
 
 
-#### Visualisasi 1: [Judul Visualisasi]
-[Insert gambar/plot]
+#### Visualisasi 1: [Distribusi Fitur Target]
+![Teks Alternatif Gambar](images/vis1_class_distribution.png)
+
 
 **Insight:**  
 [Jelaskan apa yang dapat dipelajari dari visualisasi ini]
@@ -460,7 +461,7 @@ Pada proyek ini tidak dilakukan teknik resampling seperti SMOTE atau undersampli
 
 Pendekatan ini dipilih untuk menghindari potensi overfitting yang dapat terjadi pada dataset berukuran kecil apabila dilakukan oversampling.
 ### 5.6 Ringkasan Data Preparation
-## 1. Data Cleaning
+1. Data Cleaning
 
 **Apa yang dilakukan**
 
@@ -474,7 +475,7 @@ Data cleaning penting untuk memastikan kualitas data yang digunakan dalam pemode
 
 Pemeriksaan missing values dan duplikasi dilakukan menggunakan fungsi statistik deskriptif. Outliers dianalisis menggunakan boxplot dan tidak dihapus karena dianggap merepresentasikan kondisi klinis ekstrem yang valid. Tidak dilakukan konversi tipe data karena seluruh fitur sudah dalam format numerik yang sesuai.
 
-## 2. Feature Engineering
+2. Feature Engineering
 
 **Apa yang dilakukan**
 
@@ -488,7 +489,7 @@ Seluruh fitur memiliki makna klinis yang relevan dan jumlah fitur relatif sediki
 
 Tidak dilakukan pembuatan fitur tambahan maupun dimensionality reduction seperti PCA. Seluruh fitur digunakan langsung sebagai input model setelah melalui proses preprocessing.
 
-## 3. Data Transformation
+3. Data Transformation
 
 **Apa yang dilakukan**
 
@@ -502,7 +503,7 @@ Scaling diperlukan untuk menyamakan skala antar fitur, meningkatkan stabilitas p
 
 StandardScaler diterapkan pada data latih, kemudian transformasi yang sama diaplikasikan pada data uji. Data yang telah discaling digunakan untuk Logistic Regression dan MLP, sedangkan Random Forest menggunakan data tanpa scaling.
 
-## 4. Data Splitting
+4. Data Splitting
 
 **Apa yang dilakukan**
 
@@ -516,7 +517,7 @@ Stratified splitting penting untuk menjaga distribusi kelas target (`DEATH_EVENT
 
 Pembagian data dilakukan menggunakan fungsi `train_test_split` dengan parameter `stratify=y` dan `random_state=42` untuk memastikan reproducibility.
 
-## 5. Data Balancing
+5. Data Balancing
 
 **Apa yang dilakukan**
 
@@ -549,12 +550,6 @@ Evaluasi model difokuskan pada metrik Precision, Recall, F1-Score, dan ROC-AUC, 
 - max_iter: 100
 - random_state: 42
 ```
-
-#### 6.1.4 Hasil Awal
-
-**[Tuliskan hasil evaluasi awal, akan dijelaskan detail di Section 7]**
-
----
 
 ### 6.2 Model 2 — ML / Advanced Model
 #### 6.2.1 Deskripsi Model
@@ -600,8 +595,6 @@ y_pred_advanced = model_advanced.predict(X_test)
 ```
 
 #### 6.2.4 Hasil Model
-
-**[Tuliskan hasil evaluasi, akan dijelaskan detail di Section 7]**
 
 ---
 
@@ -657,19 +650,16 @@ y_pred_advanced = model_advanced.predict(X_test)
 
 **Framework:** TensorFlow / Keras
 ```python
-import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout
-
-mlp_model = Sequential([
-    Dense(128, activation='relu', input_shape=(input_dim,)),
+model_dl = Sequential([
+    Input(shape=(X_train.shape[1],)),
+    Dense(128, activation='relu'),
     Dropout(0.3),
     Dense(64, activation='relu'),
     Dropout(0.3),
-    Dense(1, activation='sigmoid')
+    Dense(1, activation='sigmoid') # Output probabilitas untuk binary classification
 ])
 
-mlp_model.compile(
+model_dl.compile(
     optimizer='adam',
     loss='binary_crossentropy',
     metrics=['accuracy']
