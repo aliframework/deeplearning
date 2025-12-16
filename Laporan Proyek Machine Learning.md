@@ -324,9 +324,26 @@ Missing Values:
 - Alasan: Median lebih robust terhadap outliers dibanding mean
 ```
 
-**[Jelaskan langkah-langkah data cleaning yang Anda lakukan]**
+**Handling Missing Values**
+Berdasarkan hasil eksplorasi data, tidak ditemukan missing values pada seluruh fitur dalam dataset Heart Failure Clinical Records. Oleh karena itu, tidak dilakukan proses imputasi nilai kosong.
+**Removing Duplicates**
+Pemeriksaan data duplikat dilakukan dengan membandingkan seluruh baris data. Hasil pemeriksaan menunjukkan bahwa tidak terdapat data duplikat, sehingga seluruh data dapat digunakan dalam proses analisis.
+**Handling Outliners**
+Analisis outliers dilakukan menggunakan visualisasi boxplot dan statistik deskriptif. Ditemukan adanya outliers pada beberapa fitur numerik, khususnya:
 
+* `creatinine_phosphokinase`
+* `platelets`
+* `serum_creatinine`
 
+Outliers tidak dihapus karena:
+
+1. Nilai ekstrem pada data klinis dapat merepresentasikan kondisi medis yang valid.
+2. Penghapusan outliers berpotensi menghilangkan informasi penting terkait pasien berisiko tinggi.
+3. Model yang digunakan (Random Forest dan Deep Learning) relatif robust terhadap outliers.
+
+Sebagai mitigasi, dilakukan proses feature scaling untuk mengurangi dampak perbedaan skala nilai.
+**Data Type Conversion**
+Seluruh fitur telah berada pada tipe data numerik yang sesuai (integer dan float). Oleh karena itu, tidak diperlukan konversi tipe data tambahan.
 
 ### 5.2 Feature Engineering
 **Aktivitas:**
@@ -335,7 +352,18 @@ Missing Values:
 - Feature selection
 - Dimensionality reduction
 
-**[Jelaskan feature engineering yang Anda lakukan]**
+**Aktivitas yang dilakukan**
+Pada proyek ini, tidak dilakukan pembuatan fitur baru (feature creation) karena seluruh fitur klinis yang tersedia sudah relevan secara medis dan telah digunakan pada penelitian terdahulu.
+
+Namun, dilakukan beberapa langkah feature engineering berikut:
+
+* Feature selection: Seluruh fitur digunakan karena jumlah fitur relatif kecil dan semuanya memiliki makna klinis.
+* Feature scaling preparation: Fitur numerik dipersiapkan untuk proses scaling agar kompatibel dengan model tertentu seperti Logistic Regression dan MLP.
+
+Dimensionality reduction seperti PCA tidak diterapkan karena:
+
+1. Jumlah fitur relatif sedikit (13 fitur).
+2. Interpretabilitas fitur klinis lebih diutamakan dibandingkan reduksi dimensi.
 
 ### 5.3 Data Transformation
 
@@ -363,8 +391,27 @@ Missing Values:
 - Rolling statistics
 - Differencing
 
-**[Jelaskan transformasi yang Anda lakukan]**
+**Transformasi Data Tabular**
+Karena dataset berbentuk tabular numerik, transformasi yang dilakukan adalah sebagai berikut:
 
+**Encoding**
+
+Seluruh fitur kategorikal dalam dataset telah direpresentasikan dalam bentuk numerik biner (0 dan 1), sehingga tidak diperlukan proses encoding tambahan seperti One-Hot Encoding atau Label Encoding.
+
+**Scaling**
+
+Dilakukan proses Standardization (StandardScaler) untuk fitur numerik dengan tujuan:
+
+* Menyamakan skala antar fitur
+* Mempercepat konvergensi model
+* Meningkatkan performa model berbasis jarak dan gradien
+
+Scaling diterapkan khusus untuk:
+
+* Logistic Regression
+* Deep Learning (MLP)
+
+Model Random Forest tidak menggunakan data yang telah discaling, karena algoritma berbasis tree tidak sensitif terhadap skala fitur.
 ### 5.4 Data Splitting
 
 **Strategi pembagian data:**
@@ -381,8 +428,14 @@ Menggunakan stratified split untuk mempertahankan distribusi kelas:
 - Random state: 42 untuk reproducibility
 ```
 
-**[Jelaskan strategi splitting Anda dan alasannya]**
+**Strategi Pembagian Data**
+Data dibagi menjadi data latih dan data uji menggunakan teknik Stratified Train-Test Split untuk mempertahankan proporsi kelas target (`DEATH_EVENT`).
 
+* Training set: 80% (± 239 samples)
+* Test set: 20% (± 60 samples)
+* Random state: 42
+
+Stratifikasi dilakukan karena dataset bersifat imbalanced, sehingga distribusi kelas pada data latih dan data uji tetap konsisten.
 
 
 ### 5.5 Data Balancing (jika diperlukan)
@@ -392,17 +445,90 @@ Menggunakan stratified split untuk mempertahankan distribusi kelas:
 - Class weights
 - Ensemble sampling
 
-**[Jelaskan jika Anda melakukan data balancing]**
+**Kondisi Imbalanced Data**
+Distribusi kelas target menunjukkan ketidakseimbangan:
 
+* `DEATH_EVENT = 0` : ± 68%
+* `DEATH_EVENT = 1` : ± 32%
+
+**Strategi Penanganan**
+
+Pada proyek ini tidak dilakukan teknik resampling seperti SMOTE atau undersampling. Sebagai gantinya, dilakukan pendekatan berikut:
+
+* Menggunakan metrik evaluasi yang lebih komprehensif (Precision, Recall, F1-Score, ROC-AUC), bukan hanya accuracy.
+* Menggunakan model yang relatif robust terhadap imbalanced data seperti Random Forest.
+
+Pendekatan ini dipilih untuk menghindari potensi overfitting yang dapat terjadi pada dataset berukuran kecil apabila dilakukan oversampling.
 ### 5.6 Ringkasan Data Preparation
+## 1. Data Cleaning
 
-**Per langkah, jelaskan:**
-1. **Apa** yang dilakukan
-**[Jelaskan ]**
-2. **Mengapa** penting
-**[Jelaskan Mengapa ?]**
-3. **Bagaimana** implementasinya
-**[Jelaskan Bagaimana]**
+**Apa yang dilakukan**
+
+Dilakukan pemeriksaan terhadap missing values, data duplikat, outliers, serta kesesuaian tipe data pada seluruh fitur dalam dataset.
+
+**Mengapa penting**
+
+Data cleaning penting untuk memastikan kualitas data yang digunakan dalam pemodelan. Data yang bersih akan mengurangi risiko bias, kesalahan prediksi, serta meningkatkan keandalan hasil model machine learning dan deep learning.
+
+**Bagaimana implementasinya**
+
+Pemeriksaan missing values dan duplikasi dilakukan menggunakan fungsi statistik deskriptif. Outliers dianalisis menggunakan boxplot dan tidak dihapus karena dianggap merepresentasikan kondisi klinis ekstrem yang valid. Tidak dilakukan konversi tipe data karena seluruh fitur sudah dalam format numerik yang sesuai.
+
+## 2. Feature Engineering
+
+**Apa yang dilakukan**
+
+Dilakukan seleksi fitur dengan menggunakan seluruh fitur klinis yang tersedia tanpa membuat fitur baru atau melakukan reduksi dimensi.
+
+**Mengapa penting**
+
+Seluruh fitur memiliki makna klinis yang relevan dan jumlah fitur relatif sedikit, sehingga mempertahankan semua fitur dapat meningkatkan interpretabilitas model serta menghindari kehilangan informasi penting.
+
+**Bagaimana implementasinya**
+
+Tidak dilakukan pembuatan fitur tambahan maupun dimensionality reduction seperti PCA. Seluruh fitur digunakan langsung sebagai input model setelah melalui proses preprocessing.
+
+## 3. Data Transformation
+
+**Apa yang dilakukan**
+
+Dilakukan proses standardisasi (scaling) pada fitur numerik menggunakan metode StandardScaler.
+
+**Mengapa penting**
+
+Scaling diperlukan untuk menyamakan skala antar fitur, meningkatkan stabilitas proses training, serta mempercepat konvergensi model berbasis gradien seperti Logistic Regression dan Multilayer Perceptron (MLP).
+
+**Bagaimana implementasinya**
+
+StandardScaler diterapkan pada data latih, kemudian transformasi yang sama diaplikasikan pada data uji. Data yang telah discaling digunakan untuk Logistic Regression dan MLP, sedangkan Random Forest menggunakan data tanpa scaling.
+
+## 4. Data Splitting
+
+**Apa yang dilakukan**
+
+Dataset dibagi menjadi data latih dan data uji dengan proporsi 80% untuk training dan 20% untuk testing menggunakan stratified split.
+
+**Mengapa penting**
+
+Stratified splitting penting untuk menjaga distribusi kelas target (`DEATH_EVENT`) tetap seimbang pada data latih dan data uji, terutama karena dataset bersifat imbalanced.
+
+**Bagaimana implementasinya**
+
+Pembagian data dilakukan menggunakan fungsi `train_test_split` dengan parameter `stratify=y` dan `random_state=42` untuk memastikan reproducibility.
+
+## 5. Data Balancing
+
+**Apa yang dilakukan**
+
+Tidak dilakukan teknik resampling seperti SMOTE atau undersampling pada dataset.
+
+**Mengapa penting**
+
+Pada dataset berukuran kecil, teknik oversampling berpotensi menyebabkan overfitting. Oleh karena itu, penanganan imbalanced data dilakukan melalui pemilihan metrik evaluasi yang tepat.
+
+**Bagaimana implementasinya**
+
+Evaluasi model difokuskan pada metrik Precision, Recall, F1-Score, dan ROC-AUC, serta penggunaan model yang relatif robust terhadap imbalanced data seperti Random Forest.
 
 ---
 
@@ -410,29 +536,18 @@ Menggunakan stratified split untuk mempertahankan distribusi kelas:
 ### 6.1 Model 1 — Baseline Model
 #### 6.1.1 Deskripsi Model
 
-**Nama Model:** [Nama model, misal: Logistic Regression]
-**Teori Singkat:**  
-[Jelaskan secara singkat bagaimana model ini bekerja]
-**Alasan Pemilihan:**  
-[Mengapa memilih model ini sebagai baseline?]
+**Nama Model:** Logistic Regression
+
+**Teori Singkat:** Logistic Regression merupakan model klasifikasi linear yang memodelkan hubungan antara fitur input dan probabilitas kelas target menggunakan fungsi sigmoid. Model ini menghitung kombinasi linear dari fitur, kemudian mengubahnya menjadi probabilitas antara 0 dan 1, sehingga cocok untuk permasalahan klasifikasi biner.
+
+**Alasan Pemilihan:** Logistic Regression dipilih sebagai baseline karena model ini sederhana, mudah diinterpretasikan, dan sering digunakan sebagai pembanding awal untuk mengevaluasi peningkatan performa model yang lebih kompleks.
 
 #### 6.1.2 Hyperparameter
 **Parameter yang digunakan:**
 ```
-[Tuliskan parameter penting, contoh:]
-- C (regularization): 1.0
-- solver: 'lbfgs'
+- C (regularization strength): 1.0
 - max_iter: 100
-```
-
-#### 6.1.3 Implementasi (Ringkas)
-```python
-# Contoh kode (opsional, bisa dipindah ke GitHub)
-from sklearn.linear_model import LogisticRegression
-
-model_baseline = LogisticRegression(C=1.0, max_iter=100)
-model_baseline.fit(X_train, y_train)
-y_pred_baseline = model_baseline.predict(X_test)
+- random_state: 42
 ```
 
 #### 6.1.4 Hasil Awal
@@ -444,33 +559,31 @@ y_pred_baseline = model_baseline.predict(X_test)
 ### 6.2 Model 2 — ML / Advanced Model
 #### 6.2.1 Deskripsi Model
 
-**Nama Model:** [Nama model, misal: Random Forest / XGBoost]
-**Teori Singkat:**  
-[Jelaskan bagaimana algoritma ini bekerja]
+**Nama Model:** Random Forest Classifier
 
-**Alasan Pemilihan:**  
-[Mengapa memilih model ini?]
+**Teori Singkat:** Random Forest merupakan algoritma ensemble learning yang membangun banyak decision tree dan menggabungkan hasil prediksinya melalui mekanisme voting. Model ini mampu menangkap hubungan non-linear dan lebih robust terhadap noise dibandingkan model linear.
+
+**Alasan Pemilihan:** Random Forest dipilih karena kemampuannya menangani data tabular dengan baik, relatif tahan terhadap overfitting, dan tidak sensitif terhadap perbedaan skala fitur.
 
 **Keunggulan:**
-- [Sebutkan keunggulan]
+* Mampu menangkap pola non-linear
+* Robust terhadap outliers
+* Tidak memerlukan feature scaling
 
 **Kelemahan:**
-- [Sebutkan kelemahan]
+* Waktu training relatif lebih lama
+* Interpretabilitas lebih rendah dibandingkan model linear
 
 #### 6.2.2 Hyperparameter
 
 **Parameter yang digunakan:**
 ```
-[Tuliskan parameter penting, contoh:]
-- n_estimators: 100
+- n_estimators: 200
 - max_depth: 10
-- learning_rate: 0.1
-- min_samples_split: 2
+- random_state: 42
 ```
 
-**Hyperparameter Tuning (jika dilakukan):**
-- Metode: [Grid Search / Random Search / Bayesian Optimization]
-- Best parameters: [...]
+**Hyperparameter Tuning:** Tidak dilakukan hyperparameter tuning lanjutan untuk menjaga kompleksitas eksperimen dan fokus pada perbandingan antar model.
 
 #### 6.2.3 Implementasi (Ringkas)
 ```python
@@ -496,113 +609,85 @@ y_pred_advanced = model_advanced.predict(X_test)
 
 #### 6.3.1 Deskripsi Model
 
-**Nama Model:** [Nama arsitektur, misal: CNN / LSTM / MLP]
+**Nama Model:** Multilayer Perceptron (MLP)
 
-** (Centang) Jenis Deep Learning: **
-- [ ] Multilayer Perceptron (MLP) - untuk tabular
-- [ ] Convolutional Neural Network (CNN) - untuk image
-- [ ] Recurrent Neural Network (LSTM/GRU) - untuk sequential/text
-- [ ] Transfer Learning - untuk image
-- [ ] Transformer-based - untuk NLP
-- [ ] Autoencoder - untuk unsupervised
-- [ ] Neural Collaborative Filtering - untuk recommender
+**Jenis Deep Learning:**
+* ☑ Multilayer Perceptron (MLP) – untuk data tabular
 
-**Alasan Pemilihan:**  
-[Mengapa arsitektur ini cocok untuk dataset Anda?]
+**Alasan Pemilihan:** MLP dipilih karena mampu memodelkan hubungan non-linear yang kompleks pada data tabular dan dapat menangkap interaksi antar fitur yang tidak dapat dimodelkan oleh algoritma klasik.
 
-#### 6.3.2 Arsitektur Model
+### 6.3.2 Arsitektur Model
 
 **Deskripsi Layer:**
-
-[Jelaskan arsitektur secara detail atau buat tabel]
-
-**Contoh:**
 ```
-1. Input Layer: shape (224, 224, 3)
-2. Conv2D: 32 filters, kernel (3,3), activation='relu'
-3. MaxPooling2D: pool size (2,2)
-4. Conv2D: 64 filters, kernel (3,3), activation='relu'
-5. MaxPooling2D: pool size (2,2)
-6. Flatten
-7. Dense: 128 units, activation='relu'
-8. Dropout: 0.5
-9. Dense: 10 units, activation='softmax'
-
-Total parameters: [jumlah]
-Trainable parameters: [jumlah]
+1. Input Layer: shape (input_dim)
+2. Dense: 128 units, activation='relu'
+3. Dropout: 0.3
+4. Dense: 64 units, activation='relu'
+5. Dropout: 0.3
+6. Dense: 1 unit, activation='sigmoid'
 ```
+
+**Total parameters:** sesuai hasil `model.summary()`
+**Trainable parameters:** seluruh parameter bersifat trainable
 
 #### 6.3.3 Input & Preprocessing Khusus
 
-**Input shape:** [Sebutkan dimensi input]  
-**Preprocessing khusus untuk DL:**
-- [Sebutkan preprocessing khusus seperti normalisasi, augmentasi, dll.]
+**Input shape:** `(jumlah_fitur,)`
 
-#### 6.3.4 Hyperparameter
+**Preprocessing khusus untuk DL:**
+* Standardisasi fitur menggunakan StandardScaler
+* Pembagian data validasi menggunakan validation split (20%)
+
+### 6.3.4 Hyperparameter
 
 **Training Configuration:**
 ```
-- Optimizer: Adam / SGD / RMSprop
-- Learning rate: [nilai]
-- Loss function: [categorical_crossentropy / mse / binary_crossentropy / etc.]
-- Metrics: [accuracy / mae / etc.]
-- Batch size: [nilai]
-- Epochs: [nilai]
-- Validation split: [nilai] atau menggunakan validation set terpisah
-- Callbacks: [EarlyStopping, ModelCheckpoint, ReduceLROnPlateau, etc.]
+- Optimizer: Adam
+- Learning rate: default (0.001)
+- Loss function: binary_crossentropy
+- Metrics: accuracy
+- Batch size: 32
+- Epochs: 50
+- Validation split: 0.2
+- Callbacks: EarlyStopping (patience=10)
 ```
 
 #### 6.3.5 Implementasi (Ringkas)
 
-**Framework:** TensorFlow/Keras / PyTorch
+**Framework:** TensorFlow / Keras
 ```python
-# Contoh kode TensorFlow/Keras
 import tensorflow as tf
-from tensorflow import keras
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout
 
-model_dl = keras.Sequential([
-    keras.layers.Dense(128, activation='relu', input_shape=(input_dim,)),
-    keras.layers.Dropout(0.3),
-    keras.layers.Dense(64, activation='relu'),
-    keras.layers.Dropout(0.3),
-    keras.layers.Dense(num_classes, activation='softmax')
+mlp_model = Sequential([
+    Dense(128, activation='relu', input_shape=(input_dim,)),
+    Dropout(0.3),
+    Dense(64, activation='relu'),
+    Dropout(0.3),
+    Dense(1, activation='sigmoid')
 ])
 
-model_dl.compile(
+mlp_model.compile(
     optimizer='adam',
-    loss='categorical_crossentropy',
+    loss='binary_crossentropy',
     metrics=['accuracy']
-)
-
-history = model_dl.fit(
-    X_train, y_train,
-    validation_split=0.2,
-    epochs=50,
-    batch_size=32,
-    callbacks=[early_stopping]
 )
 ```
 
-#### 6.3.6 Training Process
+### 6.3.6 Training Process
 
-**Training Time:**  
-[Sebutkan waktu training total, misal: 15 menit]
+**Training Time:** ±6.28
 
-**Computational Resource:**  
-[CPU / GPU, platform: Local / Google Colab / Kaggle]
+**Computational Resource:** Google Colab – CPU
 
-**Training History Visualization:**
-
-[Insert plot loss dan accuracy/metric per epoch]
-
-**Contoh visualisasi yang WAJIB:**
-1. **Training & Validation Loss** per epoch
-2. **Training & Validation Accuracy/Metric** per epoch
+**Training History Visualization:** Visualisasi loss dan accuracy untuk data training dan validation ditampilkan untuk memantau proses pembelajaran model.
 
 **Analisis Training:**
-- Apakah model mengalami overfitting? [Ya/Tidak, jelaskan]
-- Apakah model sudah converge? [Ya/Tidak, jelaskan]
-- Apakah perlu lebih banyak epoch? [Ya/Tidak, jelaskan]
+* Overfitting: Tidak signifikan, dicegah dengan Dropout dan EarlyStopping
+* Convergence: Model menunjukkan konvergensi sebelum epoch maksimum
+* Kebutuhan epoch tambahan: Tidak diperlukan
 
 #### 6.3.7 Model Summary
 ```
@@ -655,7 +740,25 @@ history = model_dl.fit(
 - **Recall@K**
 - **NDCG (Normalized Discounted Cumulative Gain)**
 
-**[Pilih dan jelaskan metrik yang Anda gunakan]**
+**Matrix yang digunakan**
+Pada proyek ini digunakan beberapa metrik evaluasi yang relevan untuk klasifikasi medis, yaitu:
+
+* **Accuracy** 
+  Mengukur proporsi prediksi yang benar secara keseluruhan.
+
+* **Precision** 
+  Mengukur ketepatan model dalam memprediksi pasien yang benar-benar meninggal.
+
+* **Recall (Sensitivity)** ⭐ **Paling penting di domain medis** 
+  Mengukur kemampuan model dalam mendeteksi pasien yang benar-benar meninggal (menghindari false negative).
+
+* **F1-Score** 
+  Harmonic mean antara precision dan recall.
+
+* **ROC-AUC** 
+  Mengukur kemampuan model membedakan dua kelas secara keseluruhan.
+
+Dalam konteks medis, recall lebih diprioritaskan karena kesalahan false negative (pasien berisiko tinggi tapi diprediksi aman) dapat berakibat fatal.
 
 ### 7.2 Hasil Evaluasi Model
 
@@ -712,11 +815,11 @@ history = model_dl.fit(
 
 **Tabel Perbandingan:**
 
-| Model | Accuracy | Precision | Recall | F1-Score | Training Time | Inference Time |
-|-------|----------|-----------|--------|----------|---------------|----------------|
-| Baseline (Model 1) | 0.75 | 0.73 | 0.76 | 0.74 | 2s | 0.01s |
-| Advanced (Model 2) | 0.85 | 0.84 | 0.86 | 0.85 | 30s | 0.05s |
-| Deep Learning (Model 3) | 0.89 | 0.88 | 0.90 | 0.89 | 15min | 0.1s |
+| Model | Accuracy | Precision | Recall | F1-Score | Training Time (s) | Inference Time (s) |
+|-------|----------|-----------|--------|----------|-------------------|-------------------|
+| Logistic Regression | 0.82 | 0.79 | 0.58 | 0.67 | 0.02s | 0.00s |
+| Random Forest | 0.83 | 0.80 | 0.63 | 0.71 | 0.33s | 0.03s |
+| MLP | 0.78 | 0.80 | 0.42 | 0.55 | 6.28s | 0.40s |
 
 **Visualisasi Perbandingan:**  
 [Insert bar chart atau plot perbandingan metrik]
