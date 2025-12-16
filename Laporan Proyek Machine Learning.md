@@ -288,21 +288,21 @@ Jelaskan kondisi dan permasalahan data:
 
 
 **Insight:**  
-[Jelaskan apa yang dapat dipelajari dari visualisasi ini]
+Visualisasi ini menunjukkan bahwa kelas target tidak seimbang, di mana jumlah Survived (0) lebih banyak dibandingkan Death (1). Kondisi ini berpotensi membuat model bias ke kelas mayoritas, sehingga perlu perhatian khusus saat proses modeling dan evaluasi.
 
-#### Visualisasi 2: [Judul Visualisasi]
+#### Visualisasi 2: [Heatmap]
 
-[Insert gambar/plot]
-
-**Insight:**  
-[Jelaskan apa yang dapat dipelajari dari visualisasi ini]
-
-#### Visualisasi 3: [Judul Visualisasi]
-
-[Insert gambar/plot]
+![Heatmap](viz2_correlation_heatmap.png)
 
 **Insight:**  
-[Jelaskan apa yang dapat dipelajari dari visualisasi ini]
+Heatmap ini menunjukkan hubungan antar fitur dengan target DEATH_EVENT. Terlihat bahwa time memiliki korelasi negatif paling kuat (≈ -0,53), sedangkan serum_creatinine, age, dan ejection_fraction memiliki korelasi yang relatif lebih besar dibanding fitur lain. Sebagian besar fitur lain memiliki korelasi lemah, menandakan hubungan linear yang tidak terlalu kuat.
+
+#### Visualisasi 3: [Boxplot Outliner]
+
+![outliner](viz3_outliner_detection.png)
+
+**Insight:**  
+Boxplot ini menunjukkan adanya outlier yang cukup banyak pada fitur creatinine_phosphokinase, serum_creatinine, dan platelets. Nilai-nilai ekstrem terlihat jauh dari sebaran utama data, menandakan distribusi yang tidak simetris. Hal ini menunjukkan perlunya penanganan outlier (misalnya transformasi log atau capping) sebelum proses modeling agar model lebih stabil.
 
 
 
@@ -672,7 +672,8 @@ model_dl.compile(
 
 **Computational Resource:** Google Colab – CPU
 
-**Training History Visualization:** Visualisasi loss dan accuracy untuk data training dan validation ditampilkan untuk memantau proses pembelajaran model.
+**Training History Visualization:** 
+![TrainingHistory](viz3_training_history.png)
 
 **Analisis Training:**
 * Overfitting: Tidak signifikan, dicegah dengan Dropout dan EarlyStopping
@@ -681,7 +682,27 @@ model_dl.compile(
 
 #### 6.3.7 Model Summary
 ```
-[Paste model.summary() output atau rangkuman arsitektur]
+```
+Model: "sequential_15"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ dense_45 (Dense)                │ (None, 128)            │         1,408 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dropout_30 (Dropout)            │ (None, 128)            │             0 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense_46 (Dense)                │ (None, 64)             │         8,256 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dropout_31 (Dropout)            │ (None, 64)             │             0 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense_47 (Dense)                │ (None, 1)              │            65 │
+└─────────────────────────────────┴────────────────────────┴───────────────┘
+
+ Total params: 29,189 (114.02 KB)
+ Trainable params: 9,729 (38.00 KB)
+ Non-trainable params: 0 (0.00 B)
+ Optimizer params: 19,460 (76.02 KB)
+```
 ```
 
 ---
@@ -812,7 +833,7 @@ Dalam konteks medis, recall lebih diprioritaskan karena kesalahan false negative
 | MLP | 0.78 | 0.80 | 0.42 | 0.55 | 6.28s | 0.40s |
 
 **Visualisasi Perbandingan:**  
-[Insert bar chart atau plot perbandingan metrik]
+![perbandingan_model(viz5_model_comparison.png)
 
 ### 7.4 Analisis Hasil
 
