@@ -292,14 +292,14 @@ Visualisasi ini menunjukkan bahwa kelas target tidak seimbang, di mana jumlah Su
 
 #### Visualisasi 2: [Heatmap]
 
-![Heatmap](viz2_correlation_heatmap.png)
+![Heatmap](images/viz2_correlation_heatmap.png)
 
 **Insight:**  
 Heatmap ini menunjukkan hubungan antar fitur dengan target DEATH_EVENT. Terlihat bahwa time memiliki korelasi negatif paling kuat (≈ -0,53), sedangkan serum_creatinine, age, dan ejection_fraction memiliki korelasi yang relatif lebih besar dibanding fitur lain. Sebagian besar fitur lain memiliki korelasi lemah, menandakan hubungan linear yang tidak terlalu kuat.
 
 #### Visualisasi 3: [Boxplot Outliner]
 
-![outliner](viz3_outliner_detection.png)
+![outliner](images/viz3_outliner_detection.png)
 
 **Insight:**  
 Boxplot ini menunjukkan adanya outlier yang cukup banyak pada fitur creatinine_phosphokinase, serum_creatinine, dan platelets. Nilai-nilai ekstrem terlihat jauh dari sebaran utama data, menandakan distribusi yang tidak simetris. Hal ini menunjukkan perlunya penanganan outlier (misalnya transformasi log atau capping) sebelum proses modeling agar model lebih stabil.
@@ -673,7 +673,7 @@ model_dl.compile(
 **Computational Resource:** Google Colab – CPU
 
 **Training History Visualization:** 
-![TrainingHistory](viz3_training_history.png)
+![TrainingHistory](images/viz3_training_history.png)
 
 **Analisis Training:**
 * Overfitting: Tidak signifikan, dicegah dengan Dropout dan EarlyStopping
@@ -833,7 +833,7 @@ Dalam konteks medis, recall lebih diprioritaskan karena kesalahan false negative
 | MLP | 0.78 | 0.80 | 0.42 | 0.55 | 6.28s | 0.40s |
 
 **Visualisasi Perbandingan:**  
-![perbandingan_model(viz5_model_comparison.png)
+![perbandingan_model(images/viz5_model_comparison.png)
 
 ### 7.4 Analisis Hasil
 
