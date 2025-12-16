@@ -297,9 +297,9 @@ Visualisasi ini menunjukkan bahwa kelas target tidak seimbang, di mana jumlah Su
 **Insight:**  
 Heatmap ini menunjukkan hubungan antar fitur dengan target DEATH_EVENT. Terlihat bahwa time memiliki korelasi negatif paling kuat (≈ -0,53), sedangkan serum_creatinine, age, dan ejection_fraction memiliki korelasi yang relatif lebih besar dibanding fitur lain. Sebagian besar fitur lain memiliki korelasi lemah, menandakan hubungan linear yang tidak terlalu kuat.
 
-#### Visualisasi 3: [Boxplot Outliner]
+#### Visualisasi 3: [Boxplot Outlier]
 
-![outliner](images/viz3_outliner_detection.png)
+![outlier](images/viz3_outlier_detection.png)
 
 **Insight:**  
 Boxplot ini menunjukkan adanya outlier yang cukup banyak pada fitur creatinine_phosphokinase, serum_creatinine, dan platelets. Nilai-nilai ekstrem terlihat jauh dari sebaran utama data, menandakan distribusi yang tidak simetris. Hal ini menunjukkan perlunya penanganan outlier (misalnya transformasi log atau capping) sebelum proses modeling agar model lebih stabil.
