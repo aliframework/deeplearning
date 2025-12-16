@@ -284,7 +284,7 @@ Jelaskan kondisi dan permasalahan data:
 
 
 #### Visualisasi 1: [Distribusi Fitur Target]
-![Teks Alternatif Gambar](images/vis1_class_distribution.png)
+![Distribusi_Target](images/viz1_class_distribution.png)
 
 
 **Insight:**  
