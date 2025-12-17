@@ -544,25 +544,27 @@ model_dl.compile(
 #### 6.3.7 Model Summary
 ```
 ```
-Model: "sequential_15"
+```
+Model: "sequential"
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
 ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
 ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
-│ dense_45 (Dense)                │ (None, 128)            │         1,408 │
+│ dense (Dense)                   │ (None, 128)            │         1,408 │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dropout_30 (Dropout)            │ (None, 128)            │             0 │
+│ dropout (Dropout)               │ (None, 128)            │             0 │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dense_46 (Dense)                │ (None, 64)             │         8,256 │
+│ dense_1 (Dense)                 │ (None, 64)             │         8,256 │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dropout_31 (Dropout)            │ (None, 64)             │             0 │
+│ dropout_1 (Dropout)             │ (None, 64)             │             0 │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dense_47 (Dense)                │ (None, 1)              │            65 │
+│ dense_2 (Dense)                 │ (None, 1)              │            65 │
 └─────────────────────────────────┴────────────────────────┴───────────────┘
 
  Total params: 29,189 (114.02 KB)
  Trainable params: 9,729 (38.00 KB)
  Non-trainable params: 0 (0.00 B)
  Optimizer params: 19,460 (76.02 KB)
+```
 ```
 ```
 
@@ -608,7 +610,7 @@ Dalam konteks medis, recall lebih diprioritaskan karena kesalahan false negative
 ```
 
 **Confusion Matrix / Visualization:**  
-![confusion_matrixlr](images/confusion_matrix_Baseline_LogReg)
+![confusion_matrixlr](images/confusion_matrix_Baseline_LogReg.png)
 
 #### 7.2.2 Model 2 (Advanced/ML)
 **Metrik:**
@@ -620,7 +622,7 @@ Dalam konteks medis, recall lebih diprioritaskan karena kesalahan false negative
 ```
 
 **Confusion Matrix / Visualization:**  
-![confusion_matrixrf](images/confusion_matrix_Advanced_RF)
+![confusion_matrixrf](images/confusion_matrix_Advanced_RF.png)
 
 #### 7.2.3 Model 3 (Deep Learning)
 
@@ -633,7 +635,7 @@ Dalam konteks medis, recall lebih diprioritaskan karena kesalahan false negative
 ```
 
 **Confusion Matrix / Visualization:**  
-![confusion_matrixdl](images/confusion_matrix_Deep_Learning_MLP)
+![confusion_matrixdl](images/confusion_matrix_Deep_Learning_MLP.png)
 
 ### 7.3 Perbandingan Ketiga Model
 
