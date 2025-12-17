@@ -648,7 +648,7 @@ Dalam konteks medis, recall lebih diprioritaskan karena kesalahan false negative
 | MLP | 0.78 | 0.80 | 0.42 | 0.55 | 6.28s | 0.40s |
 
 **Visualisasi Perbandingan:**  
-![perbandingan_model(images/viz4_model_comparison.png)
+![perbandingan_model(images/viz5_model_comparison.png)
 
 ### 7.4 Analisis Hasil
 
