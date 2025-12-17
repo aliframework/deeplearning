@@ -9,7 +9,7 @@
 **Mata Kuliah:** [Data Science]  
 **Dosen Pengampu:** [Gus Nanang Syaifuddin,S.Kom.,M.Kom.]  
 **Tahun Akademik:** [2025/5]
-**Link GitHub Repository:** [URL Repository]
+**Link GitHub Repository:** https://github.com/aliframework/deeplearning
 **Link Video Pembahasan:** [URL Repository]
 
 ---
