@@ -76,14 +76,6 @@ Secara historis, dokter mengandalkan skor risiko klinis atau penilaian subjektif
 
 ## 3. BUSINESS UNDERSTANDING / PROBLEM UNDERSTANDING
 ### 3.1 Problem Statements
-Tuliskan 2–4 pernyataan masalah yang jelas dan spesifik.
-
-**Contoh (universal):**
-1. Model perlu mampu memprediksi nilai target dengan akurasi tinggi
-2. Sistem harus dapat mengidentifikasi pola pada citra secara otomatis
-3. Dataset memiliki noise sehingga perlu preprocessing yang tepat
-4. Dibutuhkan model deep learning yang mampu belajar representasi fitur kompleks
-
 Berdasarkan latar belakang dan karakteristik domain kesehatan kardiovaskular, permasalahan yang diangkat dalam proyek ini adalah sebagai berikut:
 
 1. Tingginya tingkat mortalitas pasien gagal jantung memerlukan sistem prediksi risiko yang akurat dan objektif untuk membantu tenaga medis dalam pengambilan keputusan klinis.
@@ -93,17 +85,9 @@ Berdasarkan latar belakang dan karakteristik domain kesehatan kardiovaskular, pe
 3. Dataset klinis bersifat tabular dan cenderung imbalanced, sehingga diperlukan teknik preprocessing dan evaluasi model yang tepat agar prediksi tidak bias terhadap kelas mayoritas.
 
 4. Perlu dilakukan perbandingan performa antara model baseline, machine learning lanjutan, dan deep learning untuk menentukan pendekatan terbaik dalam memprediksi mortalitas pasien gagal jantung.
+
 ### 3.2 Goals
-
-Tujuan harus spesifik, terukur, dan selaras dengan problem statement.
-**Contoh tujuan:**
-1. Membangun model ML untuk memprediksi variabel target dengan akurasi > 80%
-2. Mengukur performa tiga pendekatan model (baseline, advanced, deep learning)
-3. Menentukan model terbaik berdasarkan metrik evaluasi yang relevan
-4. Menghasilkan sistem yang dapat bekerja secara reproducible
-
-
-Tujuan dari proyek data science ini adalah:
+**Tujuan dari proyek data science ini adalah:**
 
 1. Membangun model klasifikasi untuk memprediksi mortalitas pasien gagal jantung dengan target akurasi minimal ≥ 80%.
 
@@ -118,14 +102,7 @@ Tujuan dari proyek data science ini adalah:
 Mahasiswa **WAJIB** menggunakan minimal **tiga model** dengan komposisi sebagai berikut:
 #### **Model 1 – Baseline Model**
 Model sederhana sebagai pembanding dasar.
-**Pilihan model:**
-- Linear Regression (untuk regresi)
-- Logistic Regression (untuk klasifikasi)
-- K-Nearest Neighbors (KNN)
-- Decision Tree
-- Naive Bayes
-
-Model yang dipilih: Logistic Regression
+**Model yang dipilih: Logistic Regression**
 
 Alasan Pemilihan:
 
@@ -136,17 +113,10 @@ Model ini mudah diinterpretasikan dan sering dijadikan baseline dalam penelitian
 Memberikan pembanding dasar sebelum menggunakan model yang lebih kompleks.
 
 Logistic Regression memodelkan probabilitas kejadian kematian (DEATH_EVENT = 1) berdasarkan kombinasi linier dari fitur-fitur klinis yang tersedia.
+
 #### **Model 2 – Advanced / ML Model**
 Model machine learning yang lebih kompleks.
-**Pilihan model:**
-- Random Forest
-- Gradient Boosting (XGBoost, LightGBM, CatBoost)
-- Support Vector Machine (SVM)
-- Ensemble methods
-- Clustering (K-Means, DBSCAN) - untuk unsupervised
-- PCA / dimensionality reduction (untuk preprocessing)
-
-Model yang dipilih: Random Forest Classifier
+**Model yang dipilih: Random Forest Classifier**
 
 Alasan Pemilihan:
 
@@ -157,46 +127,10 @@ Alasan Pemilihan:
 * Menyediakan informasi feature importance yang berguna untuk interpretasi medis.
 
 Random Forest merupakan ensemble dari beberapa decision tree yang bekerja secara voting, sehingga meningkatkan stabilitas dan akurasi prediksi.
+
 #### **Model 3 – Deep Learning Model (WAJIB)**
 Model deep learning yang sesuai dengan jenis data.
-**Pilihan Implementasi (pilih salah satu sesuai dataset):**
-**A. Tabular Data:**
-- Multilayer Perceptron (MLP) / Neural Network
-- Minimum: 2 hidden layers
-- Contoh: prediksi harga, klasifikasi binary/multiclass
-
-**B. Image Data:**
-- CNN sederhana (minimum 2 convolutional layers) **ATAU**
-- Transfer Learning (ResNet, VGG, MobileNet, EfficientNet) - **recommended**
-- Contoh: klasifikasi gambar, object detection
-
-**C. Text Data:**
-- LSTM/GRU (minimum 1 layer) **ATAU**
-- Embedding + Dense layers **ATAU**
-- Pre-trained model (BERT, DistilBERT, Word2Vec)
-- Contoh: sentiment analysis, text classification
-
-**D. Time Series:**
-- LSTM/GRU untuk sequential prediction
-- Contoh: forecasting, anomaly detection
-
-**E. Recommender Systems:**
-- Neural Collaborative Filtering (NCF)
-- Autoencoder-based Collaborative Filtering
-- Deep Matrix Factorization
-
-**Minimum Requirements untuk Deep Learning:**
-- ✅ Model harus training minimal 10 epochs
-- ✅ Harus ada plot loss dan accuracy/metric per epoch
-- ✅ Harus ada hasil prediksi pada test set
-- ✅ Training time dicatat (untuk dokumentasi)
-
-**Tidak Diperbolehkan:**
-- ❌ Copy-paste kode tanpa pemahaman
-- ❌ Model tidak di-train (hanya define arsitektur)
-- ❌ Tidak ada evaluasi pada test set
-
-Model yang dipilih: Multilayer Perceptron (MLP)
+**Model yang dipilih: Multilayer Perceptron (MLP)**
 
 Jenis Deep Learning:
 Multilayer Perceptron (MLP) – untuk data tabular
@@ -227,17 +161,6 @@ URL: https://archive.ics.uci.edu/ml/datasets/Heart+failure+clinical+records
 
 ### 4.2 Deskripsi Fitur
 Jelaskan setiap fitur/kolom yang ada dalam dataset.
-**Contoh tabel:**
-| Nama Fitur | Tipe Data | Deskripsi | Contoh Nilai |
-|------------|-----------|-----------|--------------|
-| id | Integer | ID unik data | 1, 2, 3 |
-| age | Integer | Usia (tahun) | 25, 30, 45 |
-| income | Float | Pendapatan (juta) | 5.5, 10.2 |
-| category | Categorical | Kategori produk | A, B, C |
-| text | String | Teks ulasan | "Produk bagus..." |
-| image | Image | Citra 224x224 RGB | Array 224x224x3 |
-| label | Categorical | Label target | 0, 1 atau "positif", "negatif" |
-
 | Nama Fitur | Tipe Data | Deskripsi | Contoh Nilai |
 |------------|-----------|-----------|--------------|
 | age | Float | Usia pasien (tahun) | 60, 75 |
@@ -313,18 +236,6 @@ Boxplot ini menunjukkan adanya outlier yang cukup banyak pada fitur creatinine_p
 Bagian ini menjelaskan **semua** proses transformasi dan preprocessing data yang dilakukan.
 ### 5.1 Data Cleaning
 **Aktivitas:**
-- Handling missing values
-- Removing duplicates
-- Handling outliers
-- Data type conversion
-**Contoh:**
-```
-Missing Values:
-- Fitur 'age' memiliki 50 missing values (5% dari data)
-- Strategi: Imputasi dengan median karena distribusi skewed
-- Alasan: Median lebih robust terhadap outliers dibanding mean
-```
-
 **Handling Missing Values**
 Berdasarkan hasil eksplorasi data, tidak ditemukan missing values pada seluruh fitur dalam dataset Heart Failure Clinical Records. Oleh karena itu, tidak dilakukan proses imputasi nilai kosong.
 **Removing Duplicates**
@@ -348,11 +259,6 @@ Seluruh fitur telah berada pada tipe data numerik yang sesuai (integer dan float
 
 ### 5.2 Feature Engineering
 **Aktivitas:**
-- Creating new features
-- Feature extraction
-- Feature selection
-- Dimensionality reduction
-
 **Aktivitas yang dilakukan**
 Pada proyek ini, tidak dilakukan pembuatan fitur baru (feature creation) karena seluruh fitur klinis yang tersedia sudah relevan secara medis dan telah digunakan pada penelitian terdahulu.
 
@@ -367,31 +273,6 @@ Dimensionality reduction seperti PCA tidak diterapkan karena:
 2. Interpretabilitas fitur klinis lebih diutamakan dibandingkan reduksi dimensi.
 
 ### 5.3 Data Transformation
-
-**Untuk Data Tabular:**
-- Encoding (Label Encoding, One-Hot Encoding, Ordinal Encoding)
-- Scaling (Standardization, Normalization, MinMaxScaler)
-
-**Untuk Data Text:**
-- Tokenization
-- Lowercasing
-- Removing punctuation/stopwords
-- Stemming/Lemmatization
-- Padding sequences
-- Word embedding (Word2Vec, GloVe, fastText)
-
-**Untuk Data Image:**
-- Resizing
-- Normalization (pixel values 0-1 atau -1 to 1)
-- Data augmentation (rotation, flip, zoom, brightness, etc.)
-- Color space conversion
-
-**Untuk Time Series:**
-- Creating time windows
-- Lag features
-- Rolling statistics
-- Differencing
-
 **Transformasi Data Tabular**
 Karena dataset berbentuk tabular numerik, transformasi yang dilakukan adalah sebagai berikut:
 
@@ -413,23 +294,10 @@ Scaling diterapkan khusus untuk:
 * Deep Learning (MLP)
 
 Model Random Forest tidak menggunakan data yang telah discaling, karena algoritma berbasis tree tidak sensitif terhadap skala fitur.
+
 ### 5.4 Data Splitting
 
 **Strategi pembagian data:**
-```
-- Training set: [X]% ([jumlah] samples)
-- Validation set: [X]% ([jumlah] samples) - jika ada
-- Test set: [X]% ([jumlah] samples)
-```
-**Contoh:**
-```
-Menggunakan stratified split untuk mempertahankan distribusi kelas:
-- Training: 80% (8000 samples)
-- Test: 20% (2000 samples)
-- Random state: 42 untuk reproducibility
-```
-
-**Strategi Pembagian Data**
 Data dibagi menjadi data latih dan data uji menggunakan teknik Stratified Train-Test Split untuk mempertahankan proporsi kelas target (`DEATH_EVENT`).
 
 * Training set: 80% (± 239 samples)
@@ -440,12 +308,6 @@ Stratifikasi dilakukan karena dataset bersifat imbalanced, sehingga distribusi k
 
 
 ### 5.5 Data Balancing (jika diperlukan)
-**Teknik yang digunakan:**
-- SMOTE (Synthetic Minority Over-sampling Technique)
-- Random Undersampling
-- Class weights
-- Ensemble sampling
-
 **Kondisi Imbalanced Data**
 Distribusi kelas target menunjukkan ketidakseimbangan:
 
@@ -460,6 +322,7 @@ Pada proyek ini tidak dilakukan teknik resampling seperti SMOTE atau undersampli
 * Menggunakan model yang relatif robust terhadap imbalanced data seperti Random Forest.
 
 Pendekatan ini dipilih untuk menghindari potensi overfitting yang dapat terjadi pada dataset berukuran kecil apabila dilakukan oversampling.
+
 ### 5.6 Ringkasan Data Preparation
 1. Data Cleaning
 
@@ -594,8 +457,6 @@ model_advanced.fit(X_train, y_train)
 y_pred_advanced = model_advanced.predict(X_test)
 ```
 
-#### 6.2.4 Hasil Model
-
 ---
 
 ### 6.3 Model 3 — Deep Learning Model (WAJIB)
@@ -713,44 +574,6 @@ Model: "sequential_15"
 
 **Pilih metrik yang sesuai dengan jenis tugas:**
 
-#### **Untuk Klasifikasi:**
-- **Accuracy**: Proporsi prediksi yang benar
-- **Precision**: TP / (TP + FP)
-- **Recall**: TP / (TP + FN)
-- **F1-Score**: Harmonic mean dari precision dan recall
-- **ROC-AUC**: Area under ROC curve
-- **Confusion Matrix**: Visualisasi prediksi
-
-#### **Untuk Regresi:**
-- **MSE (Mean Squared Error)**: Rata-rata kuadrat error
-- **RMSE (Root Mean Squared Error)**: Akar dari MSE
-- **MAE (Mean Absolute Error)**: Rata-rata absolute error
-- **R² Score**: Koefisien determinasi
-- **MAPE (Mean Absolute Percentage Error)**: Error dalam persentase
-
-#### **Untuk NLP (Text Classification):**
-- **Accuracy**
-- **F1-Score** (terutama untuk imbalanced data)
-- **Precision & Recall**
-- **Perplexity** (untuk language models)
-
-#### **Untuk Computer Vision:**
-- **Accuracy**
-- **IoU (Intersection over Union)** - untuk object detection/segmentation
-- **Dice Coefficient** - untuk segmentation
-- **mAP (mean Average Precision)** - untuk object detection
-
-#### **Untuk Clustering:**
-- **Silhouette Score**
-- **Davies-Bouldin Index**
-- **Calinski-Harabasz Index**
-
-#### **Untuk Recommender System:**
-- **RMSE**
-- **Precision@K**
-- **Recall@K**
-- **NDCG (Normalized Discounted Cumulative Gain)**
-
 **Matrix yang digunakan**
 Pada proyek ini digunakan beberapa metrik evaluasi yang relevan untuk klasifikasi medis, yaitu:
 
@@ -785,10 +608,9 @@ Dalam konteks medis, recall lebih diprioritaskan karena kesalahan false negative
 ```
 
 **Confusion Matrix / Visualization:**  
-[Insert gambar jika ada]
+![confusion_matrixlr](images/confusion_matrix_Baseline_LogReg)
 
 #### 7.2.2 Model 2 (Advanced/ML)
-
 **Metrik:**
 ```
 - Accuracy: 0.85
@@ -798,10 +620,7 @@ Dalam konteks medis, recall lebih diprioritaskan karena kesalahan false negative
 ```
 
 **Confusion Matrix / Visualization:**  
-[Insert gambar jika ada]
-
-**Feature Importance (jika applicable):**  
-[Insert plot feature importance untuk tree-based models]
+![confusion_matrixrf](images/confusion_matrix_Advanced_RF)
 
 #### 7.2.3 Model 3 (Deep Learning)
 
@@ -814,13 +633,7 @@ Dalam konteks medis, recall lebih diprioritaskan karena kesalahan false negative
 ```
 
 **Confusion Matrix / Visualization:**  
-[Insert gambar jika ada]
-
-**Training History:**  
-[Sudah diinsert di Section 6.3.6]
-
-**Test Set Predictions:**  
-[Opsional: tampilkan beberapa contoh prediksi]
+![confusion_matrixdl](images/confusion_matrix_Deep_Learning_MLP)
 
 ### 7.3 Perbandingan Ketiga Model
 
@@ -833,7 +646,7 @@ Dalam konteks medis, recall lebih diprioritaskan karena kesalahan false negative
 | MLP | 0.78 | 0.80 | 0.42 | 0.55 | 6.28s | 0.40s |
 
 **Visualisasi Perbandingan:**  
-![perbandingan_model(images/viz5_model_comparison.png)
+![perbandingan_model(images/viz4_model_comparison.png)
 
 ### 7.4 Analisis Hasil
 
@@ -940,25 +753,25 @@ Saran pengembangan untuk proyek selanjutnya:
 ** Centang Sesuai dengan saran anda **
 
 **Data:**
-- [ ] Mengumpulkan lebih banyak data
-- [ ] Menambah variasi data
-- [ ] Feature engineering lebih lanjut
+- [✔] Mengumpulkan lebih banyak data
+- [✔] Menambah variasi data
+- [✔] Feature engineering lebih lanjut
 
 **Model:**
 - [ ] Mencoba arsitektur DL yang lebih kompleks
-- [ ] Hyperparameter tuning lebih ekstensif
-- [ ] Ensemble methods (combining models)
+- [✔] Hyperparameter tuning lebih ekstensif
+- [✔] Ensemble methods (combining models)
 - [ ] Transfer learning dengan model yang lebih besar
 
 **Deployment:**
 - [ ] Membuat API (Flask/FastAPI)
-- [ ] Membuat web application (Streamlit/Gradio)
+- [✔] Membuat web application (Streamlit/Gradio)
 - [ ] Containerization dengan Docker
 - [ ] Deploy ke cloud (Heroku, GCP, AWS)
 
 **Optimization:**
 - [ ] Model compression (pruning, quantization)
-- [ ] Improving inference speed
+- [✔] Improving inference speed
 - [ ] Reducing model size
 
 ---
@@ -979,25 +792,19 @@ Saran pengembangan untuk proyek selanjutnya:
 
 ### 10.2 Environment & Dependencies
 
-**Python Version:** [3.8 / 3.9 / 3.10 / 3.11]
+**Python Version:** 3.10+
 
 **Main Libraries & Versions:**
 ```
-numpy==1.24.3
-pandas==2.0.3
-scikit-learn==1.3.0
-matplotlib==3.7.2
-seaborn==0.12.2
+numpy
+pandas
+scikit-learn
+matplotlib
+ucimlrepo
+joblib
+seaborn
 
-# Deep Learning Framework (pilih salah satu)
-tensorflow==2.14.0  # atau
-torch==2.1.0        # PyTorch
-
-# Additional libraries (sesuaikan)
-xgboost==1.7.6
-lightgbm==4.0.0
-opencv-python==4.8.0  # untuk computer vision
-nltk==3.8.1           # untuk NLP
-transformers==4.30.0  # untuk BERT, dll
+# Deep Learning Framework
+tensorflow
 
 ```
