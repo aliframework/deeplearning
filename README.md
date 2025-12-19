@@ -4,7 +4,7 @@
 ## 👤 Informasi
 - **Nama:** Alif Rahmathul Jadid 
 - **Repo:** https://github.com/aliframework/deeplearning
-- **Video:** [...]  
+- **Video:** https://youtu.be/-H1VkuITBwc  
 
 ---
 
