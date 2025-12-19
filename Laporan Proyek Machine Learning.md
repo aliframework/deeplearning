@@ -67,12 +67,7 @@ Referensi yang digunakan dalam proyek ini adalah:
 
 ### Latar Belakang Penerapan Data Science
 
-Secara historis, dokter mengandalkan skor risiko klinis atau penilaian subjektif. Metode ini seringkali gagal menangkap interaksi kompleks antar variabel. Contohnya, hubungan antara kadar $creatinine\_serum$ yang tinggi dan $ejection\_fraction$ yang rendah mungkin memiliki efek non-linear terhadap risiko kematian yang sulit diukur oleh model statistik linear sederhana.
-
-#### Justifikasi Machine Learning (ML/DL)
-- **Identifikasi Pola Kompleks**: ML/DL unggul dalam menemukan pola non-linear dan interaksi kompleks antar fitur (variabel klinis) yang tersembunyi.
-- **Objektivitas**: Model ML menawarkan alat bantu keputusan yang objektif, mengurangi variasi dalam penilaian risiko antar dokter.
-- **Peningkatan Akurasi**: Penelitian (seperti yang dilakukan oleh Chicco & Jurman, 2020) menunjukkan bahwa model ML dapat melebihi performa skor klinis tradisional, bahkan dengan jumlah fitur yang terbatas.
+Proyek ini bertujuan untuk memprediksi risiko kematian (DEATH_EVENT) pasien gagal jantung berdasarkan 13 fitur klinis. Fokus utama adalah membandingkan efektivitas model statistik tradisional, ensemble learning, dan deep learning pada data medis tabular yang kecil namun kompleks.
 
 ## 3. BUSINESS UNDERSTANDING / PROBLEM UNDERSTANDING
 ### 3.1 Problem Statements
